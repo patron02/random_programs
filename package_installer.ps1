@@ -3,7 +3,7 @@ This Program goes through all the remote pcs iteratively and adds files, runs pr
 You need to make sure that you are running powershell as an ADMIN or else it will not work
 If the password to enter the virtual machines or remote pcs is changed you will need to change it in the two password sections 
 Make sure powershell is enabled. The command for that is: Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypas
-Create an installer package (.mst or .msi) and place that in the $installCommand and change $softwareName
+Create an installer package (.mst or .msi) 
 Bypass dual verification regedit -> HKEY_LOCAL_MACHINE -> Software -> Microsoft -> Terminal Server Client -> New -> DWORD
 Value name: AuthenticationLevelOverride Value Data: 0
 #>
@@ -53,12 +53,12 @@ try{
 		Write-Host "Couldn't connect to $IPAddress"
 		goto Exit
 	}else{
-		# Copies Item to Remote PC
+	# Copies Item to Remote PC
        	Copy-Item -Path $sharedFilePath -Destination $CopyDeletePath -Recurse
-		# Delete item from the remote PC
+	# Delete item from the remote PC
         # Get-ChildItem -Path $CopyDeletePath -Remove-Item -Force -Confirm:$False
 
-		# Run the first program on the remote PC
+	# Run the first program on the remote PC
         Start-Process -FilePath "msiexec.exe" -ArgumentList "/i $runPath /quiet" -Wait 
 
 		# Wait for installation to finish
@@ -76,12 +76,12 @@ try{
 	Write-Host "Error on: $IPaddress "
 } finally {
 	:Exit
-    # Find Process Associated with the current Remote PC through task manager
+    	# Find Process Associated with the current Remote PC through task manager
 	$rdcProcess = Get-Process -Name "mstsc"
 	# Close Window
 	$rdcProcess | Stop-Process
 	# Increment counter 
-    $counter++
+    	$counter++
 	Start-Sleep -Seconds 5
 }
 }
