@@ -1,29 +1,45 @@
 import random
 from termcolor import colored #pip install termcolor
 
+guessed_words = set()
+
 def generate_word():
     # Generate a secret word for the player to guess
     with open("five_letter_words.txt", "r") as file:
         words = file.readlines()
         return random.choice(words).strip().lower()
 
+# Check if guess is correct
 def check_guess(secret_word, guess):
     global game_over
     global invalid 
-    # Check if guess is correct
+    global guessed_words 
+    
+    # Check length
     if len(guess) != len(secret_word):
         invalid = True 
-        return "Invalid guess. Please try a 5 letter word."
-    
+        print("Invalid guess. Please try a 5 letter word.")
+        return
+
+    # Check if they are all letters
     if not guess.isalpha():
         invalid = True
-        return "Invalid guess. Please enter only letters."
+        print("Invalid guess. Please enter only letters.")
+        return
     
+    # Check if it is a valid word
     with open("five_letter_words.txt", 'r') as file:
         word_list = file.read().splitlines()
         if guess not in word_list:
             invalid = True
             print("Invalid guess. '{}' is not a valid word.".format(guess))
+
+    # Check if the word has already been guessed
+    if guess in guessed_words:
+        invalid = True
+        print("This word has already been guessed. Try again.")
+    else:
+        guessed_words.add(guess)
 
     feedback = ""
     word_dict = {letter: secret_word.count(letter) for letter in secret_word}
