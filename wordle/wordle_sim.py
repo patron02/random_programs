@@ -62,6 +62,8 @@ def play_wordle():
     # Main function
     global game_over
     global invalid
+    global guessed_words
+    
     while True: 
         print("\nWelcome to Wordle!")
         secret_word = generate_word()
@@ -85,6 +87,8 @@ def play_wordle():
             play_again = input("\nDo you want to play again? (Y/N): ").strip().lower()
             if play_again != 'y':
                 break
+            else:
+                guessed_words = set()
 
 # Start the game
 play_wordle()
