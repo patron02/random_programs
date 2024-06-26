@@ -206,6 +206,7 @@ $btnBrowseDestination.Add_Click({
 }) 
 $form.Controls.Add($btnBrowseDestination)
 
+<#
 # Create media type dropdown
 $cmbMediaType = New-Object System.Windows.Forms.ComboBox
 $cmbMediaType.Left = 150
@@ -214,12 +215,14 @@ $cmbMediaType.Width = 250
 $cmbMediaType.Items.AddRange(@("CDR","CDRW","DVDRAM","DVDPLUSR","DVDPLUSRW","DVDPLUSR_DUALLAYER","DVDDASHR","DVDDASHRW","DVDDASHR_DUALLAYER","DISK","DVDPLUSRW_DUALLAYER","BDR","BDRE"))
 $form.Controls.Add($cmbMediaType)
 
-# Select Destination Directory
+# Select media type label
 $LabelMedia = New-Object System.Windows.Forms.Label
 $LabelMedia.Text = "Media Type:"
 $LabelMedia.Left = 10 
 $LabelMedia.Top = 120
 $form.Controls.Add($LabelMedia)
+
+#>
 
 # Create a label for filename
 $labelFile = New-Object System.Windows.Forms.Label
@@ -248,7 +251,7 @@ $textboxFile.Add_Leave({
 # Create button to start ISO creation
 $btnCreateISO = New-Object System.Windows.Forms.Button
 $btnCreateISO.Left = 150
-$btnCreateISO.Top = 160
+$btnCreateISO.Top = 120
 $btnCreateISO.Width = 100
 $btnCreateISO.Text = "Create ISO"
 $btnCreateISO.Add_Click({
@@ -266,7 +269,7 @@ $form.Controls.Add($btnCreateISO)
 # Create abort button
 $buttonAbort = New-Object system.Windows.Forms.Button
 $buttonAbort.Left = 270
-$buttonAbort.Top = 160
+$buttonAbort.Top = 120
 $buttonAbort.width = 100
 $buttonabort.Text = "Abort"
 $buttonAbort.Add_Click({
