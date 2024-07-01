@@ -127,7 +127,7 @@ function New-IsoFile {
         if ($Boot) { $Image.BootImageOptions=$Boot }  
         $Result = $Image.CreateResultImage()  
         [ISOFile]::Create($Target.FullName,$Result.ImageStream,$Result.BlockSize,$Result.TotalBlocks) 
-        Show-InfoMessage "Target image ($($Target.FullName)) has been created"
+        [System.Windows.Forms.MessageBox]::Show("Target image ($($Target.FullName)) has been created", "Information", [System.Windows.Forms.MessageBoxButtons]::OK, [System.Windows.Forms.MessageBoxIcon]::Information)
         $Target
     } 
 } 
